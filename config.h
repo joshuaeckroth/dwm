@@ -1,13 +1,13 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]            = "-*-terminus-medium-r-*-*-14-*-*-*-*-*-*-*";
-static const char normbordercolor[] = "#cccccc";
-static const char normbgcolor[]     = "#cccccc";
-static const char normfgcolor[]     = "#000000";
-static const char selbordercolor[]  = "#0066ff";
-static const char selbgcolor[]      = "#0066ff";
-static const char selfgcolor[]      = "#ffffff";
+static const char font[]            = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*";
+static const char normbordercolor[] = "#444444";
+static const char normbgcolor[]     = "#222222";
+static const char normfgcolor[]     = "#bbbbbb";
+static const char selbordercolor[]  = "#005577";
+static const char selbgcolor[]      = "#005577";
+static const char selfgcolor[]      = "#eeeeee";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const Bool showbar           = True;     /* False means no bar */
@@ -24,6 +24,7 @@ static const Rule rules[] = {
 
 /* layout(s) */
 static const float mfact      = 0.55; /* factor of master area size [0.05..0.95] */
+static const int nmaster      = 1;    /* number of clients in master area */
 static const Bool resizehints = True; /* True means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
@@ -34,7 +35,7 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod4Mask
+#define MODKEY Mod1Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -46,7 +47,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "urxvt", NULL };
+static const char *termcmd[]  = { "uxterm", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -55,6 +56,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
+	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
